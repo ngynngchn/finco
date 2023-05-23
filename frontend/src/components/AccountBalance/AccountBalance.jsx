@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+// zustand store
 import { userStore } from "../../utils/userStore.js";
+// style import
 import styles from "./AccountBalance.module.scss";
 import { formatToDollar } from "../../utils/helper.js";
 
@@ -9,7 +11,7 @@ const AccountBalance = () => {
 	const userID = userStore((state) => state.userID);
 
 	useEffect(() => {
-		const getMontlyBalance = async () => {
+		const getMonthlyBalance = async () => {
 			try {
 				const result = await fetch(
 					url + "getTotalTransactionsByMonth?id=" + userID,
@@ -20,7 +22,6 @@ const AccountBalance = () => {
 				if (result.ok) {
 					const data = await result.json();
 					setBalance(data.total);
-					// console.log(data)
 				} else {
 					const message = await result.text();
 					throw new Error(message);
@@ -29,21 +30,13 @@ const AccountBalance = () => {
 				console.log(error);
 			}
 		};
-		getMontlyBalance();
+		getMonthlyBalance();
 	});
 
 	return (
 		<div className={styles.AccountBalance}>
 			<p>Disposable income</p>
-			{/* <h4>
-				{balance < 0 ? "-$" : "$"}
-				{Math.abs(balance)}
-			</h4> */}
-
-			{/* format to Dollar */}
-			<h4>
-				{formatToDollar(balance)}
-			</h4>
+			<h4>{formatToDollar(balance)}</h4>
 		</div>
 	);
 };
