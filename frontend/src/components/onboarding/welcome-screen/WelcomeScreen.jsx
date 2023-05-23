@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "./WelcomeScreen.module.scss";
-import { userStore } from "../../utils/userStore.js";
-
-import arrow from "../../assets/img/arrow-right.svg";
-import shadow from "../../assets/img/shadow.svg";
+import { userStore } from "../../../utils/userStore.js";
+// img import
+import arrow from "../../../assets/img/arrow-right.svg";
+import shadow from "../../../assets/img/shadow.svg";
 
 function WelcomeScreen({ img, title, subtitle, button, onclick, skip, next }) {
 	const user = userStore((state) => state.userID);

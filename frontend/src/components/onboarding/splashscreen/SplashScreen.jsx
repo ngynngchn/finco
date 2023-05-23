@@ -1,6 +1,6 @@
 import styles from "./SplashScreen.module.scss";
 
-import logo from "../../assets/img/logo.svg";
+import logo from "../../../assets/img/logo.svg";
 
 function SplashScreen() {
 	return (
