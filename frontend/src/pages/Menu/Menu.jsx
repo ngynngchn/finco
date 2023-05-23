@@ -1,60 +1,43 @@
+import { useNavigate } from "react-router-dom";
 // Import styles and images
 import styles from "./Menu.module.scss";
-import forward from "../../assets/img/forward.svg";
-import toggle from "../../assets/img/toggle.png";
 import feather from "../../assets/img/feather.svg";
 import bell from "../../assets/img/bell.svg";
-import helpcircle from "../../assets/img/helpcircle.svg";
-// import settings from "../../assets/img/settings.svg";
+import help from "../../assets/img/helpcircle.svg";
+import settings from "../../assets/img/settings.svg";
 
 // Import components
-import Header from "../../components/Header/Header";
-import SettingsButton from "../../components/Menu/SettingsButton";
-import LogoutButton from "../../components/Menu/LogoutButton";
-import { useNavigate } from "react-router-dom";
-
-// const handleLogout = () => {
-//   window.localStorage.clear();
-//   window.cookies.clear();
-//   window.location.href = "/login";
-// }
+import Header from "../../components/header/Header";
+import LogoutButton from "../../components/menu/LogoutButton";
+import Button from "../../components/menu/MenuButton.jsx";
 
 const Menu = () => {
 	const navigate = useNavigate();
+
 	return (
-		<section className={styles.Menu}>
+		<main className={styles.Menu}>
 			<Header name profileMenu />
-
-			<button>
-				<img src={feather} alt="feather" />
+			<Button img={feather} alt="wallet">
 				My Wallet
-				<img src={forward} alt="arrow" />
-			</button>
-
-			<div className={styles.divMiddle}>
-				<button>
-					<img src={bell} alt="bell" />
-					Notification
-					<img src={toggle} alt="toggle" />
-				</button>
-				<div className={styles.btnMiddle}>
-					<SettingsButton />
-				</div>
-				<button
-					onClick={() => {
-						navigate("/faq");
-					}}
-					className={styles.btnMiddle}>
-					<img src={helpcircle} alt="help-circle" />
-					FAQ
-					<img src={forward} alt="arrow" />
-				</button>
-			</div>
+			</Button>
 
 			<div>
-				<LogoutButton />
+				<Button img={bell} alt="notification">
+					Notification
+				</Button>
+				<Button
+					onClick={() => navigate("/setup")}
+					img={settings}
+					alt="settings">
+					Settings
+				</Button>
+				<Button onClick={() => navigate("/faq")} img={help} alt="help">
+					FAQ
+				</Button>
 			</div>
-		</section>
+
+			<LogoutButton />
+		</main>
 	);
 };
 

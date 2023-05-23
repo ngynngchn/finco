@@ -1,5 +1,4 @@
-
-import forward from "../../assets/img/forward.svg";
+import Button from "../../components/menu/MenuButton.jsx";
 import logout from "../../assets/img/logout.svg";
 import { userStore } from "../../utils/userStore.js";
 
@@ -10,6 +9,7 @@ const LogoutButton = () => {
 		userStore.setState({ userID: null, username: null, userPic: null });
 		console.log("Cleared Storage");
 	};
+
 	const handleLogout = async () => {
 		try {
 			const response = await fetch(URL + "logout", {
@@ -17,10 +17,8 @@ const LogoutButton = () => {
 				credentials: "include",
 			});
 			if (response.ok) {
-				// Reset user state in userStore or any other state management tool you're using
-				// Redirect the user to the login page
 				clearStorage();
-				window.location.href = "/login";
+				window.location.href = "/";
 			} else {
 				throw new Error("Logout failed");
 			}
@@ -29,8 +27,11 @@ const LogoutButton = () => {
 		}
 	};
 
-    return <button onClick={handleLogout}><img src={logout} alt="arrow" />Logout<img src={forward} alt="arrow" /></button>;
-
+	return (
+		<Button onClick={handleLogout} img={logout} alt="logout">
+			Logout
+		</Button>
+	);
 };
 
 export default LogoutButton;

@@ -2,7 +2,7 @@ import styles from "./Header.module.scss";
 
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../../utils/userStore";
-
+// image import
 import backIcon from "../../assets/img/back.svg";
 import logoIcon from "../../assets/img/logo.svg";
 
@@ -14,10 +14,10 @@ function Header({ name, back, profile, profileMenu, title }) {
 	return (
 		<header className={styles.Header}>
 			{name ? (
-				<div>
+				<section>
 					<p>Welcome back,</p>
 					<h3>{username}</h3>
-				</div>
+				</section>
 			) : back ? (
 				/* go back to last page  */
 				<img

@@ -1,6 +1,6 @@
 import styles from "./Setup.module.scss";
 import SetupForm from "../../components/SetupForm/SetupForm.jsx";
-import Header from "../../components/Header/Header";
+import Header from "../../components/header/Header";
 
 const Setup = () => {
 	return (

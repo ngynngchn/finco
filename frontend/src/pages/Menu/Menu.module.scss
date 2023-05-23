@@ -1,8 +1,7 @@
 .Menu {
-	// padding: 5vw;
-	gap: 2rem;
 	display: grid;
-	grid-template-rows: min-content min-content min-content min-content;
+	gap: 2rem;
+	grid-template-rows: min-content min-content 1fr min-content;
 	button {
 		width: 100%;
 		border: none;
@@ -13,15 +12,10 @@
 		font-family: Urbanist;
 		justify-content: space-between;
 	}
-}
-
-.divMiddle {
-	width: 100%;
-	border-radius: 10px;
-}
-
-.btnMiddle {
-	margin-top: 0.25rem;
+	div {
+		border-radius: 10px;
+		background: var(--bg-100);
+	}
 }
 
 .Faq {
