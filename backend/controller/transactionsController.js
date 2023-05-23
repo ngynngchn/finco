@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 import { getDb } from "../utils/db.js";
 import { getCurrentMonthStart, getCurrentMonthEnd } from "../utils/helper.js";
 
-const COL = "finco";
+const COL = "user";
 
 export const addTransaction = async (req, res) => {
 	const userID = req.userClaims.sub;
@@ -28,7 +28,7 @@ export const addTransaction = async (req, res) => {
 };
 
 export const getAllTransactions = async (req, res) => {
-	const userID = req.query.id;
+	const userID = req.userClaims.sub;
 	try {
 		const db = await getDb();
 		const result = await db
@@ -39,18 +39,15 @@ export const getAllTransactions = async (req, res) => {
 		} else {
 			res.status(200).json(result.transactions).toString();
 		}
-		// console.log(result);
 	} catch (error) {
 		console.error(error);
 		res.status(400).json({ message: "Could not get data!" });
 	}
 };
 
-export const getTypeTransactionsbyMonth = async (req, res) => {
+export const getTransactionsFiltereredByType = async (req, res) => {
 	const user = req.userClaims.sub;
 	const type = req.query.type;
-	// console.log(user, type);
-	// const month = req.query.month;
 	try {
 		const db = await getDb();
 		const result = await db
@@ -77,7 +74,7 @@ export const getTypeTransactionsbyMonth = async (req, res) => {
 	}
 };
 
-export const getTotalTransactions = async (req, res) => {
+export const getTotalSumOfTransactions = async (req, res) => {
 	try {
 		const db = await getDb();
 		const result = await db
@@ -108,7 +105,6 @@ export const getTotalTransactionsByMonth = async (req, res) => {
 		const result = await db
 			.collection(COL)
 			.findOne({ _id: new ObjectId(req.userClaims.sub) });
-		// console.log("RESULT", result);
 		const currentMonthStart = getCurrentMonthStart();
 		const currentMonthEnd = getCurrentMonthEnd();
 		if (result.hasOwnProperty("transactions")) {
@@ -136,15 +132,13 @@ export const getTotalTransactionsByMonth = async (req, res) => {
 			throw new Error("You don't have any transactions");
 		}
 	} catch (error) {
-		// console.error(error.message);
 		res.status(400).send(error.message);
 	}
 };
 
 export const setBudget = async (req, res) => {
-	const userID = req.query.id; // Assuming the user ID is passed as a query parameter
+	const userID = req.query.id;
 	const { budget } = req.body; // Extract the budget value from the request body
-	// console.log(budget);
 	try {
 		const db = await getDb();
 		const response = await db.collection(COL).findOneAndUpdate(

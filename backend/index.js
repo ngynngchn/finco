@@ -4,24 +4,19 @@ import cors from "cors";
 import multer from "multer";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-import { getDb } from "./utils/db.js";
+import authController from "./controller/authController.js";
+
+import { verifyToken, encryptPassword } from "./middleware/authMiddleware.js";
+
 import userController from "./controller/userController.js";
-import { getAllAccountData } from "./controller/userController.js";
-import {
-	authMiddleware,
-	encryptPassword,
-} from "./middleware/authMiddleware.js";
-import exp from "constants";
-import { ObjectId } from "mongodb";
-import { getCardInfo } from "./controller/cardController.js";
 import {
 	addTransaction,
 	getAllTransactions,
-	getTotalTransactions,
 	getTotalTransactionsByMonth,
 	setBudget,
 	getTotalExpensesByMonth,
-	getTypeTransactionsbyMonth,
+	getTransactionsFiltereredByType,
+	getTotalSumOfTransactions,
 } from "./controller/transactionsController.js";
 
 const server = express();
@@ -31,7 +26,6 @@ const upload = multer({ dest: "./img" });
 // * ===== BODY PARSER ======
 // enabling cors
 server.use(cors({ origin: true, credentials: true }));
-
 // for JSON
 server.use(express.json());
 // for cookies
@@ -39,57 +33,47 @@ server.use(cookieParser());
 // for files and form fields add multer
 server.use("/img", express.static("./img"));
 
+// * ===== LOGGER ======
+server.use(morgan("dev"));
+
 //* ====== ROUTES ======
 
-// room for routes
-server.get("/", (req, res) => {
-	res.send("Hello,world");
-});
+//* user routes
+server.get("/getCardInfo", userController.cardInfo);
+server.get("/getAllAccountData", userController.accountData);
 
-// * get credit card info
-server.get("/getAccountData", getCardInfo);
-server.get("/getAllAccountData", getAllAccountData);
+//* transaction routes
+server.post("/addTransaction", upload.none(), verifyToken, addTransaction);
+server.post("/setBudget", verifyToken, setBudget);
 
-
-
-//* add transaction
-server.post("/addTransaction", upload.none(), authMiddleware, addTransaction);
-
-server.get("/getTotalTransactions", authMiddleware, getTotalTransactions);
+server.get("/getTotalTransactions", verifyToken, getTotalSumOfTransactions);
 
 server.get(
 	"/getTotalTransactionsByMonth",
-	authMiddleware,
+	verifyToken,
 	getTotalTransactionsByMonth
 );
 
-server.get("/transactions", authMiddleware, getTypeTransactionsbyMonth);
+server.get("/transactions", verifyToken, getTransactionsFiltereredByType);
 
-server.get("/getTotalExpensesByMonth", authMiddleware, getTotalExpensesByMonth);
+server.get("/getTotalExpensesByMonth", verifyToken, getTotalExpensesByMonth);
 
-server.post("/setBudget", authMiddleware, setBudget);
+server.get("/getAllTransactions", verifyToken, getAllTransactions);
 
 //* auth routes
-server.post("/login", encryptPassword, userController.login);
-server.get("/auth", authMiddleware, userController.auth);
-server.post("/logout", (req, res) => {
-	// Clear any authentication tokens or session information
-	// For example, you can clear the token stored in cookies
-	res.clearCookie("t0k3n").sendStatus(200);
-});
 
-server.post("/register", encryptPassword, async (req, res) => {
-	const db = await getDb();
-	const result = await db.collection("finco").insertOne(req.body);
-	res.json(result);
-});
+//! register route needs validation of password and email
+server.post("/register", encryptPassword, authController.register);
+server.post("/login", encryptPassword, authController.login);
+server.post("/logout", authController.logout);
+server.get("/auth", verifyToken, authController.authenticate);
+server.post("/setup", upload.single("profileImage"), authController.setup);
 
-server.post("/setup", upload.single("profileImage"), userController.setup);
-
-server.get("/getAllTransactions", getAllTransactions);
-
-// * ===== LOGGER ======
-server.use(morgan("dev"));
+// server.post("/register", encryptPassword, async (req, res) => {
+// 	const db = await getDb();
+// 	const result = await db.collection("finco").insertOne(req.body);
+// 	res.json(result);
+// });
 
 // * ===== SERVER ======
 server.listen(PORT, () => console.log("I am listening to PORT:", PORT));
