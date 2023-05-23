@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { formatToDollar } from "../../utils/helper.js";
+import { expenseStyles, formatToDollar } from "../../utils/helper.js";
 
-import CreditCardDetails from "../../components/CreditCard/CreditCardDetails";
-import Header from "../../components/Header/Header";
-import TranscactionsStats from "../../components/TransactionsStats/TranscactionsStats";
-import TransactionsCardMini from "../../components/TransactionsStats/TransactionsCardMini.jsx";
+// component import
+import CreditCardDetails from "../../components/CreditCard/CreditCardDetails.jsx";
+import Header from "../../components/header/Header.jsx";
+import TranscactionsStats from "../../components/transaction-stats/TranscactionsStats.jsx";
+import BudgetCard from "../../components/transaction-stats/BudgetCard.jsx";
 import AccountBalance from "../../components/AccountBalance/AccountBalance.jsx";
+// style import
 import styles from "./Home.module.scss";
+// image import
 import alert from "../../assets/img/alert.svg";
-import { expenseStyles } from "../../utils/helper.js";
 
 const Home = () => {
 	const [totalExpenses, setTotalExpenses] = useState(0);
@@ -36,7 +38,6 @@ const Home = () => {
 		getStats();
 	}, []);
 
-
 	return (
 		<section className={styles.Home}>
 			<Header name profile />
@@ -48,10 +49,10 @@ const Home = () => {
 				expenseAmount={totalExpenses}
 				expensePath="/report/expense"
 				incomePath="/report/income"
-        incomeContent="Monthly Income"
-        expenseContent="Monthly Expense"
+				incomeContent="Monthly Income"
+				expenseContent="Monthly Expense"
 			/>
-			<TransactionsCardMini
+			<BudgetCard
 				img={alert}
 				style={expenseStyles}
 				content="Monthly spending limit"
