@@ -2,8 +2,8 @@ import styles from "./Transactions.module.scss";
 import { useState, useEffect } from "react";
 import { formatToDollar } from "../../utils/helper.js";
 import FilterTransactionList from "../../components/FilterTransactionList/FilterTransactionList";
-import TranscactionsStats from "../../components/TransactionsStats/TranscactionsStats";
-import Header from "../../components/Header/Header.jsx";
+import TranscactionsStats from "../../components/transaction-stats/TranscactionsStats";
+import Header from "../../components/header/Header.jsx";
 
 const Transactions = () => {
 	const [totalExpenses, setTotalExpenses] = useState(0);
@@ -34,19 +34,16 @@ const Transactions = () => {
 		<section className={styles.Transactions}>
 			<Header profile title="All Transactions" />
 
-			{/* <h1>All Transactions</h1> */}
 			<TranscactionsStats
 				incomeAmount={totalIncome}
 				expenseAmount={totalExpenses}
-				incomeFilterPath="/transactions/income"
-				expensePath="/transactions/expenses"
+				expensePath="/transactions/expense"
 				incomePath="/transactions/income"
-        expenseContent={"Total Expense"}
-        incomeContent={"Total Income"}
+				expenseContent={"Total Expense"}
+				incomeContent={"Total Income"}
 				mini
 			/>
 			<FilterTransactionList />
-			{/* <TransactionList /> */}
 		</section>
 	);
 };

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import DoughnutChart from "../../components/Charts/DoughnutChart";
-import Header from "../../components/Header/Header";
+import Header from "../../components/header/Header";
 import SingleTransaction from "../../components/TransactionList/SingleTransaction";
-import TransactionCard from "../../components/TransactionsStats/TransactionCard";
+import TransactionCard from "../../components/transaction-stats/TransactionCard";
 import DatePicker from "react-datepicker";
 
 import img from "../../assets/img/trending-down.svg";

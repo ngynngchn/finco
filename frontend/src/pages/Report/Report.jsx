@@ -1,10 +1,10 @@
 import styles from "./Report.module.scss";
 import AllTransactions from "../../components/AllTransactions/AllTransactions.jsx";
-import Header from "../../components/Header/Header.jsx";
+import Header from "../../components/header/Header.jsx";
 import { userStore } from "../../utils/userStore.js";
 import { useEffect, useState } from "react";
 import MultiAxis from "../../components/Charts/MultiAxis";
-import TranscactionsStats from "../../components/TransactionsStats/TranscactionsStats";
+import TranscactionsStats from "../../components/transaction-stats/TranscactionsStats";
 import { formatToDollar } from "../../utils/helper.js";
 
 const Report = () => {
@@ -24,7 +24,7 @@ const Report = () => {
 				},
 			});
 			const data = await response.json();
-		//	console.log("data", data);
+			//	console.log("data", data);
 
 			const sorted = Object.entries(data).sort(
 				(a, b) => new Date(b[0]) - new Date(a[0])
@@ -51,15 +51,14 @@ const Report = () => {
 	return (
 		<section className={styles.Report}>
 			<Header profile title="Report" />
-			{/* <h1>Report</h1> */}
 			<TranscactionsStats
 				mini
 				incomeAmount={formatToDollar(total.income)}
 				expenseAmount={formatToDollar(total.expense)}
 				expensePath="/report/expense"
 				incomePath="/report/income"
-        expenseContent={"Total Expense"}
-        incomeContent={"Total Income"}
+				expenseContent={"Total Expense"}
+				incomeContent={"Total Income"}
 			/>
 			<div className={styles.scrollable}>
 				<div className={styles.graph}>

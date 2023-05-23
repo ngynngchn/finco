@@ -2,10 +2,10 @@ import styles from "./Login.module.scss";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { userStore } from "../../utils/userStore.js";
-import Header from "../../components/Header/Header";
 import toast, { Toaster } from "react-hot-toast";
-import { navigateWithDelay } from "../../utils/helper";
+import { navigateWithDelay } from "../../utils/helper.js";
 import Password from "../../components/Basic/Password";
+import Header from "../../components/header/Header";
 
 const Login = () => {
 	const [inputEmail, setInputEmail] = useState("");
@@ -88,20 +88,10 @@ const Login = () => {
 				<label htmlFor="password" hidden>
 					Password
 				</label>
-				{/* <input
-					type="password"
-					id="password"
-					name="password"
-					value={inputPassword}
-					onChange={(event) => setInputPassword(event.target.value)}
-					placeholder="Password"
-					required
-				/> */}
 				<Password
 					value={inputPassword}
 					onChange={(event) => setInputPassword(event.target.value)}
 				/>
-
 				<Link>Forgot password?</Link>
 				<button
 					className={inputEmail == " " && inputPassword == " " && "failed"}

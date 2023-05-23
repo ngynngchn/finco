@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import DoughnutChart from "../../components/Charts/DoughnutChart";
-import Header from "../../components/Header/Header";
+import Header from "../../components/header/Header";
 import SingleTransaction from "../../components/TransactionList/SingleTransaction";
-import TransactionCard from "../../components/TransactionsStats/TransactionCard";
+import TransactionCard from "../../components/transaction-stats/TransactionCard";
 import img from "../../assets/img/trending-up.svg";
 import { formatToDollar, incomeStyles } from "../../utils/helper";
 import styles from "./Report.module.scss";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DateRangePicker from "../../components/Basic/datepicker/DateRangePicker";
 
 function CategoryReport() {
 	const url = import.meta.env.VITE_BACKEND_URL;
@@ -16,8 +15,8 @@ function CategoryReport() {
 	const [totalIncome, setTotalIncome] = useState(null);
 	const [categories, setCategories] = useState(null);
 	const [dateRange, setDateRange] = useState({
-		startDate: null,
-		endDate: null,
+		start: null,
+		end: null,
 	});
 
 	useEffect(() => {
@@ -59,7 +58,7 @@ function CategoryReport() {
 	useEffect(() => {
 		const filteredTransactions = transactions.filter((transaction) => {
 			const transactionDate = new Date(transaction.date);
-			const { startDate, endDate } = dateRange;
+			const { start: startDate, end: endDate } = dateRange;
 			return (
 				(!startDate || transactionDate >= startDate) &&
 				(!endDate || transactionDate <= new Date(endDate.getTime() + 86400000))
@@ -107,37 +106,23 @@ function CategoryReport() {
 					{income && <DoughnutChart type={income} />}
 				</div>
 				<div className={styles.sticky}>
-					<div className={styles.FilterContainer}>
-						<DatePicker
-							id="startDatePicker"
-							selected={dateRange.startDate}
-							onChange={(date) =>
-								setDateRange({ ...dateRange, startDate: date })
-							}
-							dateFormat="yyyy-MM-dd"
-							isClearable
-							placeholderText="Select start date"
-						/>
-						<DatePicker
-							id="endDatePicker"
-							selected={dateRange.endDate}
-							onChange={(date) => setDateRange({ ...dateRange, endDate: date })}
-							dateFormat="yyyy-MM-dd"
-							isClearable
-							placeholderText="Select end date"
-						/>
-					</div>
+					<DateRangePicker
+						startDateChange={(date) =>
+							setDateRange({ ...dateRange, start: date })
+						}
+						endDateChange={(date) => setDateRange({ ...dateRange, end: date })}
+						dateRange={dateRange}
+					/>
 				</div>
 				<div className={styles.container}>
 					{transactions
 						.filter((transaction) => {
 							const transactionDate = new Date(transaction.date);
 							return (
-								(!dateRange.startDate ||
-									transactionDate >= dateRange.startDate) &&
-								(!dateRange.endDate ||
+								(!dateRange.start || transactionDate >= dateRange.start) &&
+								(!dateRange.end ||
 									transactionDate <=
-										new Date(dateRange.endDate.getTime() + 86400000))
+										new Date(dateRange.end.getTime() + 86400000))
 							);
 						})
 						.sort((a, b) => new Date(b.date) - new Date(a.date))

@@ -5,7 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 import { transactionStore } from "../../utils/transactionStore.js";
 // import { userStore } from "../../utils/userStore.js";
-import Header from "../../components/Header/Header";
+import Header from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
 import { categories, navigateWithDelay } from "../../utils/helper.js";
 import { useState } from "react";
