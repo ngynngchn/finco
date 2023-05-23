@@ -1,5 +1,9 @@
 # Finco - Personal Finance Tracker
 
+
+## Original Repository 
+The original repository can be found  [here](https://github.com/allbutgold/finco).
+
 ## Description
 
 Finco is a personal finance tracker application developed as a final exam project for a software development boot camp. The application allows users to add and manage transactions, display and filter them in various ways. Additional features include setting a spending limit and creating a user account with a credit card and a profile image. This application is built using the React framework, Node.js, Express.js, and SASS, with a MongoDB database for storage.
