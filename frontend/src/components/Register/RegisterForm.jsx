@@ -42,7 +42,7 @@ const RegisterForm = () => {
 			})
 			.catch((error) => {
 				console.error(error);
-				throw new Error(err);
+				throw new Error(error);
 			});
 
 		await toast.promise(createAccount, {
@@ -84,12 +84,6 @@ const RegisterForm = () => {
 				<label htmlFor="password" hidden>
 					Password
 				</label>
-				{/* <input
-					placeholder="Password"
-					type="password"
-					name="password"
-					onChange={(e) => setPassword(e.target.value)}
-				/> */}
 
 				<Password onChange={(e) => setPassword(e.target.value)} />
 				<div>

@@ -78,7 +78,6 @@ export const failed = (element) => {
 	}, 400);
 };
 
-import { elements } from "chart.js";
 //* category mapping
 
 import bill from "../assets/img/categories/bill.svg";

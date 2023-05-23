@@ -19,7 +19,7 @@ function CreditCardDetails() {
 	useEffect(() => {
 		const getCreditCardInfo = async () => {
 			try {
-				const result = await fetch(url + "getAccountData?id=" + userID, {
+				const result = await fetch(url + "getCardInfo?id=" + userID, {
 					credentials: "include",
 				});
 				if (result.ok) {
@@ -31,7 +31,6 @@ function CreditCardDetails() {
 					}).format(new Date(data.expDate));
 
 					let cardNumber = data.cardNumber.substr(-4);
-					// let cardNumber = data.cardNumber.split(" ")[3];
 					if (new Date(data.expDate) > new Date()) {
 						setValidCC(true);
 					} else {
