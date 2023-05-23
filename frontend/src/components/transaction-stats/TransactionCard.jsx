@@ -7,7 +7,7 @@ function TransactionCard({ amount, img, style, content, mini }) {
 			<img src={img} alt="icon" style={style} />
 			<p>{content}</p>
 			<h4>
-				{content == "Expense" || content == "Current" ? "-" : "+"}
+				{content.includes("Expense") || content == "Current" ? "-" : "+"}
 				{amount}
 			</h4>
 		</article>
