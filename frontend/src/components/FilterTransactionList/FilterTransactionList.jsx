@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
-import { userStore } from "../../utils/userStore.js";
 import styles from "./FilterTransactionList.module.scss";
-import SingleTransaction from "../TransactionList/SingleTransaction.jsx";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { formatToWeekday } from "../../utils/helper.js";
+
+import DateRangePicker from "../Basic/datepicker/DateRangePicker.jsx";
+import CategorySearch from "../Basic/category-search/CategorySearch.jsx";
+import FilteredList from "../TransactionList/FilteredList";
 
 const FilterTransactionList = () => {
 	const [transactions, setTransactions] = useState([]);
 	const [filterTerm, setFilterTerm] = useState("");
-	const [startDate, setStartDate] = useState(null);
-	const [endDate, setEndDate] = useState(null);
-	const userID = userStore((state) => state.userID);
+	const [dateRange, setDateRange] = useState({
+		start: null,
+		end: null,
+	});
 
 	const URL = import.meta.env.VITE_BACKEND_URL;
 
 	useEffect(() => {
 		const getTransactions = async () => {
-			const response = await fetch(URL + "getAllTransactions?id=" + userID, {
+			const response = await fetch(URL + "getAllTransactions", {
 				credentials: "include",
 				method: "GET",
 				headers: {
@@ -30,18 +30,6 @@ const FilterTransactionList = () => {
 		getTransactions();
 	}, []);
 
-	const handleFilterChange = (event) => {
-		setFilterTerm(event.target.value);
-	};
-
-	const handleStartDateChange = (date) => {
-		setStartDate(date);
-	};
-
-	const handleEndDateChange = (date) => {
-		setEndDate(date);
-	};
-
 	const filteredTransactions = Object.entries(transactions)
 		.filter(([key, array]) =>
 			array.some(
@@ -49,8 +37,8 @@ const FilterTransactionList = () => {
 					transaction.category
 						.toLowerCase()
 						.includes(filterTerm.toLowerCase()) &&
-					(!startDate || new Date(transaction.date) >= startDate) &&
-					(!endDate || new Date(transaction.date) <= endDate)
+					(!dateRange.start || new Date(transaction.date) >= dateRange.start) &&
+					(!dateRange.end || new Date(transaction.date) <= dateRange.end)
 			)
 		)
 		.map(([key, array]) => [
@@ -60,8 +48,8 @@ const FilterTransactionList = () => {
 					transaction.category
 						.toLowerCase()
 						.includes(filterTerm.toLowerCase()) &&
-					(!startDate || new Date(transaction.date) >= startDate) &&
-					(!endDate || new Date(transaction.date) <= endDate)
+					(!dateRange.start || new Date(transaction.date) >= dateRange.start) &&
+					(!dateRange.end || new Date(transaction.date) <= dateRange.end)
 			),
 		]);
 
@@ -71,53 +59,16 @@ const FilterTransactionList = () => {
 
 	return (
 		<section className={styles.Transactions}>
-			<div className={styles.DateFilterContainer}>
-				{/* <label htmlFor="date"></label> */}
-				<DatePicker
-					selected={startDate}
-					onChange={handleStartDateChange}
-					dateFormat="yyyy-MM-dd"
-					isClearable
-					placeholderText="Select start date"
-					shouldCloseOnSelect={true}
-				/>
-
-				{/* <label htmlFor="date"></label> */}
-				<DatePicker
-					selected={endDate}
-					onChange={handleEndDateChange}
-					dateFormat="yyyy-MM-dd"
-					isClearable
-					placeholderText="Select end date"
-					shouldCloseOnSelect={true}
-				/>
-			</div>
-			<div className={styles.CategoryFilterContainer}>
-				<label>
-					<input
-						type="text"
-						value={filterTerm}
-						onChange={handleFilterChange}
-						placeholder="Filter by Category"
-					/>
-				</label>
-			</div>
-
-			<article className={styles.FilteredTransactions}>
-				{filteredTransactions.length === 0 ? (
-					<p>Sorry, nothing found</p>
-				) : (
-					filteredTransactions.map(([key, array]) => (
-						<div className={styles.TransactionContainer} key={key}>
-							<p>{formatToWeekday(key)}</p>
-							<h1>{key}</h1>
-							{array.map((transaction, index) => (
-								<SingleTransaction transaction={transaction} key={index} />
-							))}
-						</div>
-					))
-				)}
-			</article>
+			<DateRangePicker
+				startDateChange={(date) => setDateRange({ ...dateRange, start: date })}
+				endDateChange={(date) => setDateRange({ ...dateRange, end: date })}
+				dateRange={dateRange}
+			/>
+			<CategorySearch
+				onChange={(event) => setFilterTerm(event.target.value)}
+				value={filterTerm}
+			/>
+			<FilteredList filteredTransactions={filteredTransactions} />
 		</section>
 	);
 };

@@ -1,49 +1,37 @@
 import SingleTransaction from "../TransactionList/SingleTransaction.jsx";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 import styles from "./AllTransactions.module.scss";
+import DateRangePicker from "../Basic/datepicker/DateRangePicker.jsx";
 
 const TransactionList = ({ transactions }) => {
-	const [startDate, setStartDate] = useState(null);
-	const [endDate, setEndDate] = useState(null);
-
+	const [dateRange, setDateRange] = useState({
+		start: null,
+		end: null,
+	});
 	const filterTransactions = () => {
-		if (startDate && endDate) {
+		if (dateRange.start && dateRange.end) {
 			const filteredTransactions = transactions.filter(([date]) => {
 				const transactionDate = new Date(date);
 				return (
-					transactionDate >= startDate &&
-					transactionDate <= new Date(endDate.getTime() + 86400000)
+					transactionDate >= dateRange.start &&
+					// 86400000 represents a day in ms
+					transactionDate <= new Date(dateRange.end.getTime() + 86400000)
 				);
 			});
 			return filteredTransactions;
 		}
 		return transactions;
 	};
+
 	if (!transactions) return;
 	return (
 		<div className={styles.TransactionContainer}>
-			<div className={styles.FilterContainer}>
-				<DatePicker
-					id="startDatePicker"
-					selected={startDate}
-					onChange={(date) => setStartDate(date)}
-					dateFormat="yyyy-MM-dd"
-					isClearable
-					placeholderText="Select start date"
-				/>
-
-				<DatePicker
-					id="endDatePicker"
-					selected={endDate}
-					onChange={(date) => setEndDate(date)}
-					dateFormat="yyyy-MM-dd"
-					isClearable
-					placeholderText="Select end date"
-				/>
-			</div>
+			<DateRangePicker
+				startDateChange={(date) => setDateRange({ ...dateRange, start: date })}
+				endDateChange={(date) => setDateRange({ ...dateRange, end: date })}
+				dateRange={dateRange}
+			/>
 
 			<div className={styles.List}>
 				{filterTransactions().map(([date, array]) => (

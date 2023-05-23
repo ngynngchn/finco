@@ -83,3 +83,13 @@
 .Sorry {
 	margin-top: 1rem;
 }
+
+// LIST COMPONENT
+.FilteredList {
+	overflow-y: scroll;
+	height: 100%;
+	p,
+	h1 {
+		margin-bottom: 0.5rem;
+	}
+}
