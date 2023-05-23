@@ -1,10 +1,9 @@
-import styles from "./AddExpense.module.scss";
+import styles from "./AddTransactions.module.scss";
 import CreditCardDetails from "../../components/CreditCard/CreditCardDetails";
 import TransactionForm from "../../components/TransactionForm/TransactionForm";
 import toast, { Toaster } from "react-hot-toast";
 
 import { transactionStore } from "../../utils/transactionStore.js";
-// import { userStore } from "../../utils/userStore.js";
 import Header from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
 import { categories, navigateWithDelay } from "../../utils/helper.js";
@@ -21,8 +20,6 @@ function AddTransactions() {
 		transactionStore.getState().setTransactionType(value);
 	const [type, setType] = useState(currentType);
 	const [selectedCat, setCategory] = useState(categories[`${type}`][0].name);
-
-	// const userID = userStore.getState().userID;
 
 	const addTransaction = async (event) => {
 		event.preventDefault();
