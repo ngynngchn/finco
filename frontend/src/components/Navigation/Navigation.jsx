@@ -1,5 +1,4 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./Navigation.module.scss";
 import {
 	addActive,
@@ -13,24 +12,7 @@ import {
 } from "../../assets/img/navigation/navigation-icons.js";
 
 const Navigation = () => {
-	const [showPopup, setShowPopup] = useState(false);
-	const navigate = useNavigate();
 	const location = useLocation();
-
-	const handleAddExpense = () => {
-		navigate("/add-expense");
-		setShowPopup(false);
-	};
-
-	const handleAddIncome = () => {
-		navigate("/add-income");
-		setShowPopup(false);
-	};
-
-	const handleTogglePopup = () => {
-		setShowPopup((prevState) => !prevState);
-	};
-
 	return (
 		<nav className={styles.Navigation}>
 			<Link to="/">
