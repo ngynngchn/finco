@@ -58,17 +58,17 @@
 		overflow-y: scroll;
 		height: 100%;
 	}
-	article {
-		h4 {
-			grid-row: 1/3;
-			align-self: center;
-			justify-self: end;
-			font-size: 1.4rem;
-		}
-		p {
-			display: none;
-		}
-	}
+	// article {
+	// 	h4 {
+	// 		grid-row: 1/3;
+	// 		align-self: center;
+	// 		justify-self: end;
+	// 		font-size: 1.4rem;
+	// 	}
+	// 	p {
+	// 		display: none;
+	// 	}
+	// }
 }
 //* Container of expenses and income
 .FilterContainer {
