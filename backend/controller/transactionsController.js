@@ -57,12 +57,17 @@ export const getTransactionsFiltereredByType = async (req, res) => {
 			throw new Error("Could not find user");
 		} else {
 			let allTransactions = result.transactions;
-			let subject = { transactions: [], total: 0 };
+			let subject = { transactions: {}, total: 0 };
 			Object.entries(allTransactions).forEach(([key, value]) => {
 				value.forEach((transaction) => {
 					if (transaction.type == type) {
-						subject.transactions.push(transaction);
-						subject.total += +transaction.amount;
+						if (subject.transactions.hasOwnProperty(key)) {
+							subject.transactions[key].push(transaction);
+							subject.total += +transaction.amount;
+						} else {
+							subject.transactions[key] = [transaction];
+							subject.total += +transaction.amount;
+						}
 					}
 				});
 			});

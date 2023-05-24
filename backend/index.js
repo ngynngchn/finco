@@ -69,11 +69,5 @@ server.post("/logout", authController.logout);
 server.get("/auth", verifyToken, authController.authenticate);
 server.post("/setup", upload.single("profileImage"), authController.setup);
 
-// server.post("/register", encryptPassword, async (req, res) => {
-// 	const db = await getDb();
-// 	const result = await db.collection("finco").insertOne(req.body);
-// 	res.json(result);
-// });
-
 // * ===== SERVER ======
 server.listen(PORT, () => console.log("I am listening to PORT:", PORT));
