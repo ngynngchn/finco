@@ -2,19 +2,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 // pages
-import Home from "./pages/home/Home.jsx";
-import Auth from "./pages/authentication/Auth";
-import Register from "./pages/authentication/register/Register.jsx";
-import Login from "./pages/Authentication/login/Login";
-import Menu from "./pages/menu/Menu.jsx";
-import AddTransactions from "./pages/add-transactions/AddTransactions";
 import Onboarding from "./pages/onboarding/Onboarding.jsx";
-import Report from "./pages/report/Report.jsx";
+import Home from "./pages/home/Home.jsx";
+import Auth from "./pages/authentication/Auth.jsx";
+import Register from "./pages/authentication/register/Register.jsx";
+import Login from "./pages/Authentication/login/Login.jsx";
+import Menu from "./pages/menu/Menu.jsx";
 import Setup from "./pages/setup/Setup.jsx";
 import Transactions from "./pages/transactions/Transactions.jsx";
-import CategoryReport from "./pages/report/CategoryReport.jsx";
-import FAQ from "./pages/menu/FAQ";
-import FilterTransactions from "./pages/transaction-type/FilterTransactions";
+import AddTransactions from "./pages/add-transactions/AddTransactions.jsx";
+import FilterTransactions from "./pages/transaction-type/FilterTransactions.jsx";
+import Report from "./pages/report/Report.jsx";
+import CategoryReport from "./pages/report/category-report/CategoryReport.jsx";
+import FAQ from "./pages/menu/FAQ.jsx";
 // import AnimatedOnboarding from "./AnimatedOnboarding";
 
 function App() {
