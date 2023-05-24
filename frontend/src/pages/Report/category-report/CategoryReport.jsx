@@ -2,21 +2,25 @@ import {
 	expenseStyles,
 	incomeStyles,
 	formatToDollar,
-} from "../../utils/helper.js";
+	capitlaizeFirstLetter,
+} from "../../../utils/helper.js";
 import { useEffect, useState } from "react";
-
-import Header from "../../components/header/Header";
-import DoughnutChart from "../../components/charts/DoughnutChart";
-import TransactionCard from "../../components/transaction-stats/TransactionCard";
-import DateRangePicker from "../../components/basic/datepicker/DateRangePicker";
-import CategorySearch from "../../components/basic/category-search/CategorySearch";
-import FilteredList from "../../components/transaction-list/transaction-filter/FilteredList";
-
-import expenseIcon from "../../assets/img/trending-down.svg";
-import incomeIcon from "../../assets/img/trending-up.svg";
-import styles from "./CategoryReport.module.scss";
-import "react-datepicker/dist/react-datepicker.css";
 import { useParams } from "react-router-dom";
+
+// style import
+import styles from "./CategoryReport.module.scss";
+
+// component import
+import Header from "../../../components/header/Header.jsx";
+import DoughnutChart from "../../../components/charts/DoughnutChart.jsx";
+import TransactionCard from "../../../components/transaction-stats/transaction-card/TransactionCard.jsx";
+import DateRangePicker from "../../../components/basic/datepicker/DateRangePicker.jsx";
+import CategorySearch from "../../../components/basic/category-search/CategorySearch.jsx";
+
+// img import
+import expenseIcon from "../../../assets/img/trending-down.svg";
+import incomeIcon from "../../../assets/img/trending-up.svg";
+import TransactionList from "../../../components/transaction-list/transaction-list/TransactionList.jsx";
 
 function CategoryReport() {
 	const url = import.meta.env.VITE_BACKEND_URL;
@@ -31,6 +35,7 @@ function CategoryReport() {
 		endDate: null,
 	});
 
+	// intitial fetch and values to set
 	useEffect(() => {
 		const getTransactions = async () => {
 			try {
@@ -41,7 +46,7 @@ function CategoryReport() {
 					const data = await response.json();
 					setTransactions(data.transactions);
 					setTotalSum(data.total);
-					setUpCategories(Object.entries(data.transactions));
+					configureCategories(Object.entries(data.transactions));
 				} else {
 					const message = await response.text();
 					throw new Error(message);
@@ -53,8 +58,9 @@ function CategoryReport() {
 		getTransactions();
 	}, []);
 
+	// reconfiguration if dateRange or filterterm are changed
 	useEffect(() => {
-		setUpCategories(filteredTransactions);
+		configureCategories(filteredTransactions);
 	}, [dateRange, filterTerm]);
 
 	const filteredTransactions = Object.entries(transactions)
@@ -81,7 +87,7 @@ function CategoryReport() {
 		])
 		.sort((a, b) => new Date(b[0]) - new Date(a[0]));
 
-	const setUpCategories = (transactionsObject) => {
+	const configureCategories = (transactionsObject) => {
 		let categories = {};
 		let total = 0;
 		transactionsObject.forEach(([date, transactions]) => {
@@ -95,6 +101,7 @@ function CategoryReport() {
 				}
 			});
 		});
+		// neccessary for chart.js graph
 		let data = {
 			labels: Object.keys(categories),
 			data: Object.values(categories),
@@ -108,7 +115,8 @@ function CategoryReport() {
 
 	return (
 		<section className={styles.CategoryReport}>
-			<Header profile back title={params.type} />
+			<Header profile back title={capitlaizeFirstLetter(params.type)} />
+			{/* (1) Current income or expenses amount   */}
 			<TransactionCard
 				mini
 				content="Current"
@@ -116,10 +124,13 @@ function CategoryReport() {
 				img={params.type === "expense" ? expenseIcon : incomeIcon}
 				amount={formatToDollar(totalSum)}
 			/>
+
 			<div className={styles.scrollable}>
+				{/* (2) Graph */}
 				<div className={styles.graph}>
 					{graphData && <DoughnutChart type={graphData} />}
 				</div>
+				{/* (3) Date selection */}
 				<DateRangePicker
 					startDateChange={(date) =>
 						setDateRange({ ...dateRange, start: date })
@@ -127,12 +138,13 @@ function CategoryReport() {
 					endDateChange={(date) => setDateRange({ ...dateRange, end: date })}
 					dateRange={dateRange}
 				/>
+				{/* (3) Category search */}
 				<CategorySearch
 					onChange={(event) => setFilterTerm(event.target.value)}
 					value={filterTerm}
 				/>
-
-				<FilteredList filteredTransactions={filteredTransactions} />
+				{/* (4) List to display transactions/ filtered transactions */}
+				<TransactionList filteredTransactions={filteredTransactions} />
 			</div>
 		</section>
 	);
