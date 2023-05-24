@@ -1,36 +1,13 @@
 .DatePicker {
 	display: flex;
-	position: sticky;
 	flex-wrap: nowrap;
-	flex-direction: row;
 	justify-content: center;
-	margin-bottom: 5vw;
 	gap: 2vw;
 	position: sticky;
 	top: 0;
-	position: relative;
 	div {
 		input {
-			padding: 2vw;
-			border: 1px solid var(--stroke-100);
-			border-radius: 30px;
-			font-size: 1rem;
-		}
-		button {
-			background: none;
-		}
-	}
-}
-.DateFilterContainer {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: row;
-	justify-content: center;
-	margin-bottom: 0.25rem;
-	gap: 2vw;
-	div {
-		input {
-			padding: 2vw;
+			padding: 1vh 4vw;
 			border: 1px solid var(--stroke-100);
 			border-radius: 30px;
 			font-size: 1rem;

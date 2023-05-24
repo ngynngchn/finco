@@ -26,13 +26,17 @@ ChartJS.register(
 	annotationPlugin
 );
 
-function MultiAxis({ filteredTransaction }) {
+function MultiAxis({ transactions }) {
 	const data = {
 		incomeData: [],
 		expensesData: [],
 		balanceData: [],
 		labels: [],
 	};
+
+	let filteredTransaction = Object.entries(transactions).sort(
+		(a, b) => new Date(a[0]) - new Date(b[0])
+	);
 
 	for (const [date, transactions] of filteredTransaction) {
 		let income = 0;
@@ -57,6 +61,7 @@ function MultiAxis({ filteredTransaction }) {
 		data.balanceData.push(balance);
 		data.labels.push(date);
 	}
+	console.log(data);
 
 	const chartData = {
 		labels: data.labels,

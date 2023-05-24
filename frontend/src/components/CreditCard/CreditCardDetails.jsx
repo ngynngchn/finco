@@ -2,7 +2,6 @@ import styles from "./CreditCardDetails.module.scss";
 
 import chip from "../../assets/img/chip.svg";
 import check from "../../assets/img/check.svg";
-import cross from "../../assets/img/cross.svg";
 import danger from "../../assets/img/danger.svg";
 import alert from "../../assets/img/alert.svg";
 import { useEffect, useRef, useState } from "react";
