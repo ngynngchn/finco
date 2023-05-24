@@ -7,9 +7,9 @@ import SplashScreen from "../../components/onboarding/SplashScreen/SplashScreen.
 
 const Auth = () => {
 	const [isLoading, setIsLoading] = useState(true);
-	const navigator = useNavigate();
+	const navigate = useNavigate();
 
-	const URL = import.meta.env.VITE_BACKEND_URL;
+	const url = import.meta.env.VITE_BACKEND_URL;
 	const setUser = (value) => userStore.getState().setUserID(value);
 	const clearStorage = () => {
 		userStore.setState({ userID: null, username: null, userPic: null });
@@ -18,17 +18,31 @@ const Auth = () => {
 
 	useEffect(() => {
 		(async () => {
-			const response = await fetch(URL + "auth", { credentials: "include" });
+			const response = await fetch(url + "auth", { credentials: "include" });
 			if (response.ok) {
 				setIsLoading(false);
 				const user = await response.json();
 				setUser(user);
+				// return;
+			} else {
+				try {
+					const response = await fetch(url + "logout", {
+						method: "POST",
+						credentials: "include",
+					});
+					if (response.ok) {
+						clearStorage();
+						navigate("/");
+					} else {
+						throw new Error("Logout failed");
+					}
+				} catch (error) {
+					console.log(error);
+				}
 
-				return;
+				clearStorage();
+				navigate("/onboarding");
 			}
-			// add logout
-			clearStorage();
-			navigator("/onboarding");
 		})();
 	}, []);
 
