@@ -4,7 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
 import { navigateWithDelay } from "../../utils/helper";
-import Password from "../Basic/Password";
+import Password from "../basic/password-input/Password";
 
 const RegisterForm = () => {
 	const [username, setUsername] = useState("");

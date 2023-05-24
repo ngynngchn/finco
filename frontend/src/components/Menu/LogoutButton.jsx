@@ -3,7 +3,7 @@ import logout from "../../assets/img/logout.svg";
 import { userStore } from "../../utils/userStore.js";
 
 const LogoutButton = () => {
-	const URL = import.meta.env.VITE_BACKEND_URL;
+	const url = import.meta.env.VITE_BACKEND_URL;
 
 	const clearStorage = () => {
 		userStore.setState({ userID: null, username: null, userPic: null });
@@ -12,7 +12,7 @@ const LogoutButton = () => {
 
 	const handleLogout = async () => {
 		try {
-			const response = await fetch(URL + "logout", {
+			const response = await fetch(url + "logout", {
 				method: "POST",
 				credentials: "include",
 			});

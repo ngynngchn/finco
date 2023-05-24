@@ -1,0 +1,12 @@
+.FilteredList {
+	overflow-y: scroll;
+	height: 100%;
+	p,
+	h3 {
+		margin-bottom: 0.5rem;
+	}
+	h3 {
+		font-variation-settings: "wght" 700;
+		font-size: 1.1rem;
+	}
+}

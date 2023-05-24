@@ -6,7 +6,8 @@ import CreditCardDetails from "../../components/CreditCard/CreditCardDetails.jsx
 import Header from "../../components/header/Header.jsx";
 import TranscactionsStats from "../../components/transaction-stats/TranscactionsStats.jsx";
 import BudgetCard from "../../components/transaction-stats/BudgetCard.jsx";
-import AccountBalance from "../../components/AccountBalance/AccountBalance.jsx";
+import BalanceCard from "../../components/transaction-stats/balance-card/BalanceCard.jsx";
+
 // style import
 import styles from "./Home.module.scss";
 // image import
@@ -43,7 +44,7 @@ const Home = () => {
 			<Header name profile />
 			<CreditCardDetails />
 			<h3>Your monthly stats</h3>
-			<AccountBalance />
+			<BalanceCard />
 			<TranscactionsStats
 				incomeAmount={totalIncome}
 				expenseAmount={totalExpenses}

@@ -1,0 +1,13 @@
+.BalanceCard {
+	padding: 1.5vh;
+	display: grid;
+	gap: 1vh;
+	background-color: var(--bg-100);
+	border-radius: 40px;
+	width: 100%;
+	text-align: center;
+	p {
+		font-size: 0.9rem;
+		font-variation-settings: "wght" 400;
+	}
+}
