@@ -1,54 +1,69 @@
 # Finco - Personal Finance Tracker
 
+## Original Repository and Alterations
 
-## Original Repository 
-The original repository can be found  [here](https://github.com/allbutgold/finco).
+The original repository can be found [here](https://github.com/allbutgold/finco).
+
+As the original project was collaboratively developed, there was a lot of repetitive code.
+After reviewing the original project I restructured the directories and altered some components and pages for better readablity and DRY code.
 
 ## Description
 
-Finco is a personal finance tracker application developed as a final exam project for a software development boot camp. The application allows users to add and manage transactions, display and filter them in various ways. Additional features include setting a spending limit and creating a user account with a credit card and a profile image. This application is built using the React framework, Node.js, Express.js, and SASS, with a MongoDB database for storage.
+Finco is a personal finance tracker. This web application allows users to add and manage transactions, display and filter them in various ways. Additional features include setting a spending limit and creating a user account with a credit card and a profile image.
+
+## Tech Stack
+
+- **React.js**: Frontend UI components
+- **Node.js & Express.js**: Backend Server
+- **Chart.js**: Chart generation
+- **MongoDB**: Database storage
+- **SASS **: Styling
+
+## Design
+
+The design was provided by our bootcamp via a Figma file.
 
 ## Features
 
+- **Animated Onboarding**: Users will meet an animated onboarding section after visiting for better engagement.
 - **User Account Creation**: Create a personal account with a credit card and a profile image.
 - **Transaction Management**: Add and manage your transactions efficiently.
 - **Filtering and Display**: Display and filter your transactions in various ways to better understand your spending habits.
 - **Spending Limit**: Set a spending limit to manage your finances better.
 
-## Live Demo
+## Screenshots
 
-You can check out the live demo of the Finco app [here](https://finco-frontend-production.up.railway.app). A test user is also available for you to explore the functionalities of the app.
+Here are some screenshots of our application:
 
-## Installation
+![Home](frontend/src/assets/img/screenshots/home.png?raw=true "Home")
+![Add Transactions](frontend/src/assets/img/screenshots/add-transactions.png?raw=true "Add Transactions")
+![Expense Chart](frontend/src/assets/img/screenshots/expense.png?raw=true "Expense Chart")
+![Transactions](frontend/src/assets/img/screenshots/transactions.png?raw=true "Transactions")
+
+## Future Features
+
+- **Forget Passoword**: Be able to reset your password.
+- **Personal Description**: Add personal descriptions to transactions.
+- **Delete and Edit**: Delete or Edit your transactions.
+
+## Installation for further development
 
 1. Clone the repository to your local machine.
-2. Run `npm install` to install the necessary dependencies.
-3. Ensure you have MongoDB installed and running on your machine.
-4. Update the `.env` file with your MongoDB connection string.
+2. This project is a mono-repository therefore run `npm install` to install the necessary dependencies after moving in to the backend and frontend directory.
+3. Ensure you have a MongoDB account and your MongoDB connection string ready.
+4. Update the `.env` file with the corresponding `env-sample` file for backend and frontend.
+5. Change in to the backend directory and run `npm run dev` if you have the latest version of npm installed. Otherwise run `npm run dev:nodemon` to start the server.
+6. Change in to the frontend directory and run `npm run dev -- --open` to open the finco application in your browser.
+7. To check out our application on you phone you might as well run `npm run dev -- --host` and copy the IP address to youe mobile browser.
 
 ## Usage
 
-After setting up the project and the database, start the application with `npm start`. Navigate to the hosted local server and create an account to start tracking your finances.
+After setting up your environment, create an account and test out our web-application!
 
-## Contributing
+## Credits and Acknowledgements
 
-Contributions to Finco are welcomed! Here's how you can help:
-
-- **Issues**: Feel free to open issues if you find any bug or have any suggestions for improvements.
-- **Pull Requests**: Have a fix for a bug, or a new feature you'd like to add? Send in your pull requests! Ensure that your code is well-commented, and your commit messages are informative.
+The original project was developed as the final project for our web development bootcamp. It's a collaborative work of three developers, mentioned under "Contributors". Special thanks to our instructors and everyone who provided their invaluable feedback during the development process.
 
 ## License
 
 This project is licensed under the terms of the MIT license. See [LICENSE](LICENSE) for more details.
-
-## Contact Information
-
-If you have any questions, feedback, or suggestions, please feel free to reach out. You can drop a message by opening an issue on this project.
-
-## Credits and Acknowledgements
-
-This project was developed as a part of the final exam project for the software development boot camp. It's a collaborative work of three developers. Thanks to all the peers and instructors who provided their invaluable feedback during the development process.
-
-## Changelog
-
-The changelog for each version will be updated here as the project evolves.
