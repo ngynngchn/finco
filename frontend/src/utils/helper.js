@@ -4,8 +4,24 @@ export const formatToDollar = (value) => {
 		style: "currency",
 		currency: "USD",
 		maximumFractionDigits: 2,
-		minimumFractionDigits: 0,
+		minimumFractionDigits: 2,
 	}).format(value);
+};
+
+//* format date to regular MM/DD/YYYY
+export const formatDate = (value) => {
+	let date = new Intl.DateTimeFormat("en-US", {
+		year: "2-digit",
+		month: "2-digit",
+		day: "2-digit",
+	}).format(new Date(value));
+	return date.replaceAll("/", "-");
+};
+
+//* format date to weekday
+export const formatToWeekday = (date) => {
+	const newDate = new Date(date);
+	return new Intl.DateTimeFormat("en-us", { weekday: "long" }).format(newDate);
 };
 
 //* styles
@@ -45,22 +61,7 @@ export const mapCategory = (category, type) => {
 	return found["emoji"];
 };
 
-//* map color to transaction
-export const mapColor = (category) => {
-	let found = categories[category.type].find((element) => {
-		return element.name == category.category;
-	});
-	return found.color;
-};
-
-//* transform date to weekday
-export const formatToWeekday = (date) => {
-	const newDate = new Date(date);
-	return new Intl.DateTimeFormat("en-us", { weekday: "long" }).format(newDate);
-};
-
 //* format credicard number
-
 export const formatCreditCardNumber = (inputValue) => {
 	// Remove all non-digits from the input value
 	const digitsOnly = inputValue.replace(/\D/g, "");
@@ -70,7 +71,6 @@ export const formatCreditCardNumber = (inputValue) => {
 };
 
 //* add failed class to element
-
 export const failed = (element) => {
 	element.classList.add("failed");
 	setTimeout(() => {
@@ -78,8 +78,18 @@ export const failed = (element) => {
 	}, 400);
 };
 
-//* category mapping
+//* capitalize first letter
+export const capitlaizeFirstLetter = (string) => {
+	if (string.length === 0) {
+		return " ";
+	} else {
+		let firstLetter = string[0].toUpperCase();
+		let remainingWord = string.slice(1);
+		return firstLetter + remainingWord;
+	}
+};
 
+//* category mapping
 import bill from "../assets/img/categories/bill.svg";
 import bills from "../assets/img/categories/bills.svg";
 import capital from "../assets/img/categories/capital.svg";
