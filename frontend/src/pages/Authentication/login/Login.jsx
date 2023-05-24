@@ -19,6 +19,7 @@ const Login = () => {
 	const navigate = useNavigate();
 
 	//* userStore
+	const setBudget = userStore((state) => state.setBudget);
 	const setUser = (value) => userStore.getState().setUserID(value);
 	const setUsername = (value) => userStore.getState().setUsername(value);
 	const setUserPic = (value) => userStore.getState().setUserPic(value);
@@ -49,6 +50,7 @@ const Login = () => {
 			.then((user) => {
 				setUser(user.id);
 				setUsername(user.user);
+				setBudget(user.budget);
 				if (user.pic) {
 					setUserPic(url + user.pic);
 					navigateWithDelay(navigate, "/", 2000);

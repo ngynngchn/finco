@@ -83,6 +83,7 @@ const login = async (req, res) => {
 			id: foundUser._id,
 			user: foundUser.account.username,
 			pic: foundUser.account.profileImage,
+			budget: foundUser.account.budget,
 		});
 	} catch (error) {
 		console.log("userController-login: ", error);
