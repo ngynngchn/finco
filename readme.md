@@ -35,10 +35,10 @@ The design was provided by our bootcamp via a Figma file.
 
 Here are some screenshots of our application:
 
-![Home](frontend/src/assets/img/screenshots/home.png?raw=true "Home")
-![Add Transactions](frontend/src/assets/img/screenshots/add-transactions.png?raw=true "Add Transactions")
-![Expense Chart](frontend/src/assets/img/screenshots/expense.png?raw=true "Expense Chart")
-![Transactions](frontend/src/assets/img/screenshots/transactions.png?raw=true "Transactions")
+<img src="https://github.com/ngynngchn/finco/assets/107808109/744286a4-9f69-4f28-b0e9-7a8aead4d37d" width=50% height=50%>
+<img src="https://github.com/ngynngchn/finco/assets/107808109/66be818d-6e49-4e4f-9df2-e41c82a151ce" width=50% height=50%>
+<img src="https://github.com/ngynngchn/finco/assets/107808109/3367d6bb-7380-4414-b560-6ef3b687c2ae" width=50% height=50%>
+<img src="https://github.com/ngynngchn/finco/assets/107808109/50fb519b-d219-4fba-a5ba-11ea599d06fa" width=50% height=50%>
 
 ## Future Features
 
