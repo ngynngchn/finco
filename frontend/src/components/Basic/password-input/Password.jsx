@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Password.css";
+import styles from "./Password.module.scss";
 
 import show from "../../../assets/img/eye-open.svg";
 import hide from "../../../assets/img/eye-closed.svg";
@@ -9,7 +9,7 @@ function Password({ value, onChange }) {
 	const [type, setType] = useState("password");
 
 	return (
-		<div className="pwd-container">
+		<div className={styles.Password}>
 			<input
 				type={type}
 				name="password"
