@@ -1,4 +1,4 @@
-import React from "react";
+// style import
 import styles from "./CategorySearch.module.scss";
 
 function CategorySearch({ onChange, value }) {
