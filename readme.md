@@ -17,7 +17,7 @@ Finco is a personal finance tracker. This web application allows users to add an
 - **Node.js & Express.js**: Backend Server
 - **Chart.js**: Chart generation
 - **MongoDB**: Database storage
-- **SASS **: Styling
+- **SASS**: Styling
 
 ## Design
 
