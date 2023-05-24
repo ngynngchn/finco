@@ -1,11 +1,14 @@
+import { useEffect, useRef, useState } from "react";
+import { userStore } from "../../utils/userStore.js";
+
+// style import
 import styles from "./CreditCardDetails.module.scss";
 
+//img import
 import chip from "../../assets/img/chip.svg";
 import check from "../../assets/img/check.svg";
 import danger from "../../assets/img/danger.svg";
 import alert from "../../assets/img/alert.svg";
-import { useEffect, useRef, useState } from "react";
-import { userStore } from "../../utils/userStore.js";
 
 function CreditCardDetails() {
 	const url = import.meta.env.VITE_BACKEND_URL;
@@ -26,7 +29,7 @@ function CreditCardDetails() {
 
 					let date = new Intl.DateTimeFormat("en-US", {
 						year: "2-digit",
-						month: "numeric",
+						month: "2-digit",
 					}).format(new Date(data.expDate));
 
 					let cardNumber = data.cardNumber.substr(-4);

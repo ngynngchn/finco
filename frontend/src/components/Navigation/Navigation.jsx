@@ -1,5 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
+// style import
 import styles from "./Navigation.module.scss";
+
+// img import
 import {
 	addActive,
 	add,
@@ -11,8 +13,11 @@ import {
 	report,
 } from "../../assets/img/navigation/navigation-icons.js";
 
+import { Link, useLocation } from "react-router-dom";
+
 const Navigation = () => {
 	const location = useLocation();
+
 	return (
 		<nav className={styles.Navigation}>
 			<Link to="/">

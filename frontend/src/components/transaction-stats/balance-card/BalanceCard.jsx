@@ -1,24 +1,19 @@
 import { useState, useEffect } from "react";
-// zustand store
-import { userStore } from "../../../utils/userStore.js";
+import { formatToDollar } from "../../../utils/helper.js";
+
 // style import
 import styles from "./BalanceCard.module.scss";
-import { formatToDollar } from "../../../utils/helper.js";
 
 const BalanceCard = () => {
 	const [balance, setBalance] = useState(0);
 	const url = import.meta.env.VITE_BACKEND_URL;
-	const userID = userStore((state) => state.userID);
 
 	useEffect(() => {
 		const getMonthlyBalance = async () => {
 			try {
-				const result = await fetch(
-					url + "getTotalTransactionsByMonth?id=" + userID,
-					{
-						credentials: "include",
-					}
-				);
+				const result = await fetch(url + "getTotalTransactionsByMonth", {
+					credentials: "include",
+				});
 				if (result.ok) {
 					const data = await result.json();
 					setBalance(data.total);

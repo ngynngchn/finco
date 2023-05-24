@@ -1,9 +1,12 @@
-import styles from "./Onboarding.module.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import SplashScreen from "../../components/onboarding/SplashScreen/SplashScreen";
-import WelcomeScreen from "../../components/onboarding/welcome-screen/WelcomeScreen";
+// style import
+import styles from "./Onboarding.module.scss";
+
+// component import
+import SplashScreen from "../../components/onboarding/SplashScreen/SplashScreen.jsx";
+import WelcomeScreen from "../../components/onboarding/welcome-screen/WelcomeScreen.jsx";
 
 // img import
 import bankcard from "../../assets/img/bankcard.svg";
@@ -31,9 +34,7 @@ const Onboarding = () => {
 		  spending"
 				subtitle="Say goodbye to chaotic finances and start your journey to financial freedom with Finco."
 				button="Get Started"
-				onclick={() => {
-					navigate("/register");
-				}}
+				onclick={() => navigate("/register")}
 			/>
 			<WelcomeScreen
 				img={bankcard}
@@ -42,9 +43,7 @@ const Onboarding = () => {
 				button="Next"
 				skip
 				next={next}
-				onclick={() => {
-					setNext(true);
-				}}
+				onclick={() => setNext(true)}
 			/>
 		</div>
 	);

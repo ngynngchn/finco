@@ -1,7 +1,6 @@
-import React from "react";
 import Header from "../../components/header/Header";
 import styles from "./Menu.module.scss";
-
+// TODO: styling
 function FAQ() {
 	return (
 		<section className={styles.Faq}>

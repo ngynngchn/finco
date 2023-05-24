@@ -1,9 +1,12 @@
-import styles from "./RegisterForm.module.scss";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
-
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import { navigateWithDelay } from "../../utils/helper";
+
+// style import
+import styles from "./RegisterForm.module.scss";
+
+// component import
 import Password from "../basic/password-input/Password";
 
 const RegisterForm = () => {
@@ -13,12 +16,12 @@ const RegisterForm = () => {
 	const [agreedToTnC, setAgreedToTnC] = useState(false);
 	const navigate = useNavigate();
 
-	const URL = import.meta.env.VITE_BACKEND_URL;
+	const url = import.meta.env.VITE_BACKEND_URL;
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const createAccount = fetch(URL + "register", {
+		const createAccount = fetch(url + "register", {
 			credentials: "include",
 			method: "POST",
 			headers: {
@@ -37,7 +40,6 @@ const RegisterForm = () => {
 			})
 			.then((data) => {
 				console.log(data);
-				// e.target.reset();
 				navigateWithDelay(navigate, "/login", 1500);
 			})
 			.catch((error) => {

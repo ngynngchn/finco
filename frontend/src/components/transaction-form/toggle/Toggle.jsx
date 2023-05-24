@@ -1,9 +1,11 @@
-import React from "react";
+import { transactionStore } from "../../../utils/transactionStore.js";
+
+// style import
 import style from "./Toggle.module.scss";
-import { transactionStore } from "../../../utils/transactionStore";
 
 function Toggle({ onchange }) {
 	const type = transactionStore.getState().transactionType;
+
 	return (
 		<div className={style.Toggle}>
 			<input

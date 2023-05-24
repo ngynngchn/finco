@@ -1,19 +1,22 @@
-import styles from "./Login.module.scss";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { userStore } from "../../../utils/userStore";
 import toast, { Toaster } from "react-hot-toast";
 import { navigateWithDelay } from "../../../utils/helper.js";
 
-import Password from "../../../components/basic/password-input/Password";
-import Header from "../../../components/header/Header";
+// style import
+import styles from "./Login.module.scss";
+
+// component import
+import Password from "../../../components/basic/password-input/Password.jsx";
+import Header from "../../../components/header/Header.jsx";
 
 const Login = () => {
-	const [inputEmail, setInputEmail] = useState("");
-	const [inputPassword, setInputPassword] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
-	const URL = import.meta.env.VITE_BACKEND_URL;
-	const navigator = useNavigate();
+	const url = import.meta.env.VITE_BACKEND_URL;
+	const navigate = useNavigate();
 
 	//* userStore
 	const setUser = (value) => userStore.getState().setUserID(value);
@@ -22,15 +25,16 @@ const Login = () => {
 
 	const login = async (event) => {
 		event.preventDefault();
-		const loginUser = fetch(URL + "login", {
+
+		const loginUser = fetch(url + "login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				account: {
-					email: inputEmail,
-					password: inputPassword,
+					email: email,
+					password: password,
 				},
 			}),
 			credentials: "include",
@@ -46,10 +50,10 @@ const Login = () => {
 				setUser(user.id);
 				setUsername(user.user);
 				if (user.pic) {
-					setUserPic(URL + user.pic);
-					navigateWithDelay(navigator, "/", 2000);
+					setUserPic(url + user.pic);
+					navigateWithDelay(navigate, "/", 2000);
 				} else {
-					navigateWithDelay(navigator, "/setup", 2000);
+					navigateWithDelay(navigate, "/setup", 2000);
 				}
 			})
 			.catch((err) => {
@@ -81,8 +85,8 @@ const Login = () => {
 					type="email"
 					id="email"
 					name="email"
-					value={inputEmail}
-					onChange={(event) => setInputEmail(event.target.value)}
+					value={email}
+					onChange={(event) => setEmail(event.target.value)}
 					placeholder="Email"
 					required
 				/>
@@ -90,15 +94,11 @@ const Login = () => {
 					Password
 				</label>
 				<Password
-					value={inputPassword}
-					onChange={(event) => setInputPassword(event.target.value)}
+					value={password}
+					onChange={(event) => setPassword(event.target.value)}
 				/>
-				<Link>Forgot password?</Link>
-				<button
-					// className={inputEmail == " " && inputPassword == " " && "failed"}
-					type="submit">
-					Login
-				</button>
+				{/* <Link>Forgot password?</Link> */}
+				<button type="submit">Login</button>
 			</form>
 			<p>
 				Don`t have an account ? <Link to="/register">Sign up</Link>

@@ -1,21 +1,26 @@
-import styles from "./AddTransactions.module.scss";
-import toast, { Toaster } from "react-hot-toast";
-import { transactionStore } from "../../utils/transactionStore.js";
-
-import CreditCardDetails from "../../components/CreditCard/CreditCardDetails";
-import TransactionForm from "../../components/transaction-form/TransactionForm";
-import Toggle from "../../components/transaction-form/toggle/Toggle";
-import Header from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
 import { categories, navigateWithDelay } from "../../utils/helper.js";
+import { transactionStore } from "../../utils/transactionStore.js";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+
+// style import
+import styles from "./AddTransactions.module.scss";
+
+// component import
+import CreditCardDetails from "../../components/CreditCard/CreditCardDetails.jsx";
+import TransactionForm from "../../components/transaction-form/TransactionForm.jsx";
+import Toggle from "../../components/transaction-form/toggle/Toggle.jsx";
+import Header from "../../components/header/Header.jsx";
 
 function AddTransactions() {
 	const currentType = transactionStore.getState().transactionType;
 	const setCurrentType = (value) =>
 		transactionStore.getState().setTransactionType(value);
 	const [type, setType] = useState(currentType);
-	const [selectedCat, setCategory] = useState(categories[`${type}`][0].name);
+	const [selectedCategory, setCategory] = useState(
+		categories[`${type}`][0].name
+	);
 
 	const url = import.meta.env.VITE_BACKEND_URL;
 
@@ -23,11 +28,14 @@ function AddTransactions() {
 
 	const addTransaction = async (event) => {
 		event.preventDefault();
+
 		const form = new FormData(event.target);
+
 		form.append("type", type);
 		form.delete("search");
+
 		if (form.get("category") == null) {
-			form.append("category", selectedCat);
+			form.append("category", selectedCategory);
 		}
 		const transactionFetch = fetch(url + "addTransaction", {
 			method: "POST",

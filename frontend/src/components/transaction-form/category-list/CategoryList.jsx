@@ -1,20 +1,22 @@
-import styles from "./CategoryList.module.scss";
 import { categories } from "../../../utils/helper.js";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-//TODO: Write categories into database ?
-//TODO: BONUS: ADD search function and add Category function
+
+// style import
+import styles from "./CategoryList.module.scss";
+
+// img import
 import forward from "../../../assets/img/forward.svg";
 import search from "../../../assets/img/search.svg";
 import back from "../../../assets/img/back.svg";
 
 function CategoryList({ onClick, open, onclick, currentType }) {
 	const [type, setType] = useState(currentType);
-	// console.log("ctlist", type);
-	const navigate = useNavigate();
 	const inputRef = useRef();
 	const searchRef = useRef();
-	const [filteredCat, setFiltered] = useState(categories[`${type}`]);
+	const [filteredCategories, setFilteredCategories] = useState(
+		categories[`${type}`]
+	);
 
 	useEffect(() => {
 		setType(currentType);
@@ -26,7 +28,7 @@ function CategoryList({ onClick, open, onclick, currentType }) {
 		const filtered = categories[`${type}`].filter((category) =>
 			category.name.toLowerCase().includes(searchQuery)
 		);
-		setFiltered(filtered);
+		setFilteredCategories(filtered);
 	};
 
 	return (
@@ -38,7 +40,8 @@ function CategoryList({ onClick, open, onclick, currentType }) {
 					? `${styles.CategoryList}`
 					: `${styles.CategoryList} ${styles.moveOut}`
 			}>
-			<div className={styles.categoryHeader}>
+			{/* (1) Head of category list */}
+			<div className={styles.Head}>
 				<button onClick={onclick}>
 					<img src={back} alt="back" />
 				</button>
@@ -57,9 +60,10 @@ function CategoryList({ onClick, open, onclick, currentType }) {
 				</label>
 			</div>
 
-			<div className={styles.categoryList}>
-				{filteredCat.length > 0 ? (
-					filteredCat.map((category) => (
+			{/* (2) List of categories  */}
+			<div className={styles.List}>
+				{filteredCategories.length > 0 ? (
+					filteredCategories.map((category) => (
 						<label onClick={onClick} key={category.id} htmlFor={category.name}>
 							<h3>{category.emoji}</h3>
 							<p>{category.name}</p>
@@ -69,7 +73,6 @@ function CategoryList({ onClick, open, onclick, currentType }) {
 								id={category.name}
 								value={category.name}
 								ref={inputRef}
-								// required
 								onChange={(e) => console.log(e.target.value)}
 							/>
 							<img src={forward} alt="icon" />

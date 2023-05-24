@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { capitlaizeFirstLetter } from "../../utils/helper.js";
 
+// style import
 import styles from "./FilterTransactions.module.scss";
 
 import Header from "../../components/header/Header.jsx";
 import DateRangePicker from "../../components/Basic/datepicker/DateRangePicker.jsx";
-import CategorySearch from "../../components/Basic/category-search/CategorySearch";
-import FilteredList from "../../components/transaction-list/transaction-filter/FilteredList";
+import CategorySearch from "../../components/Basic/category-search/CategorySearch.jsx";
+import TransactionList from "../../components/transaction-list/transaction-list/TransactionList.jsx";
 
 const FilterTransactions = () => {
 	const [transactions, setTransactions] = useState([]);
@@ -18,11 +20,11 @@ const FilterTransactions = () => {
 
 	const params = useParams();
 
-	const URL = import.meta.env.VITE_BACKEND_URL;
+	const url = import.meta.env.VITE_BACKEND_URL;
 
 	useEffect(() => {
 		const getTransactions = async () => {
-			const response = await fetch(URL + "getAllTransactions", {
+			const response = await fetch(url + "getAllTransactions", {
 				credentials: "include",
 				method: "GET",
 				headers: {
@@ -69,7 +71,11 @@ const FilterTransactions = () => {
 
 	return (
 		<section className={styles.Transactions}>
-			<Header back profile title={"All " + params.type} />
+			<Header
+				back
+				profile
+				title={"All " + capitlaizeFirstLetter(params.type)}
+			/>
 			<DateRangePicker
 				startDateChange={(date) => setDateRange({ ...dateRange, start: date })}
 				endDateChange={(date) => setDateRange({ ...dateRange, end: date })}
@@ -79,7 +85,7 @@ const FilterTransactions = () => {
 				onChange={(event) => setFilterTerm(event.target.value)}
 				value={filterTerm}
 			/>
-			<FilteredList filteredTransactions={filteredTransactions} weekday />
+			<TransactionList filteredTransactions={filteredTransactions} weekday />
 		</section>
 	);
 };

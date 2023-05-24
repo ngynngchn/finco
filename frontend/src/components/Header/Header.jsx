@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
+import { userStore } from "../../utils/userStore.js";
+
+// style import
 import styles from "./Header.module.scss";
 
-import { useNavigate } from "react-router-dom";
-import { userStore } from "../../utils/userStore";
-// image import
+// img import
 import backIcon from "../../assets/img/back.svg";
 import logoIcon from "../../assets/img/logo.svg";
 
@@ -27,7 +29,7 @@ function Header({ name, back, profile, profileMenu, title }) {
 					alt="back"
 				/>
 			) : (
-				/* show finco icon*/
+				/* show finco icon and navigate to home*/
 				<img
 					src={logoIcon}
 					alt="logo"
@@ -38,6 +40,8 @@ function Header({ name, back, profile, profileMenu, title }) {
 
 			<h1>{title}</h1>
 			{profile && (
+				/* show profile image and navigate to menu*/
+
 				<img
 					onClick={() => navigate("/menu")}
 					src={pic}
@@ -47,6 +51,8 @@ function Header({ name, back, profile, profileMenu, title }) {
 				/>
 			)}
 			{profileMenu && (
+				/* show profile image and navigate to home*/
+
 				<img
 					onClick={() => navigate("/")}
 					src={pic}

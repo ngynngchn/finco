@@ -1,12 +1,12 @@
 import { useState } from "react";
-
-import styles from "./TransactionList.module.scss";
-
+// style import
+import styles from "./TransactionFilter.module.scss";
+// component import
 import DateRangePicker from "../basic/datepicker/DateRangePicker.jsx";
-import CategorySearch from "../basic/category-search/CategorySearch";
-import FilteredList from "./transaction-filter/FilteredList";
+import CategorySearch from "../basic/category-search/CategorySearch.jsx";
+import TransactionList from "./transaction-list/TransactionList";
 
-const TransactionList = ({ transactions }) => {
+const TransactionFilter = ({ transactions, weekday }) => {
 	const [filterTerm, setFilterTerm] = useState("");
 	const [dateRange, setDateRange] = useState({
 		start: null,
@@ -40,20 +40,25 @@ const TransactionList = ({ transactions }) => {
 	if (!transactions) return;
 
 	return (
-		<div className={styles.TransactionList}>
+		<div className={styles.TransactionFilter}>
+			{/* (1) Date selection */}
 			<DateRangePicker
 				startDateChange={(date) => setDateRange({ ...dateRange, start: date })}
 				endDateChange={(date) => setDateRange({ ...dateRange, end: date })}
 				dateRange={dateRange}
 			/>
+			{/* (2) Category search */}
 			<CategorySearch
 				onChange={(event) => setFilterTerm(event.target.value)}
 				value={filterTerm}
 			/>
-
-			<FilteredList filteredTransactions={filteredTransactions} />
+			{/* (3) List */}
+			<TransactionList
+				filteredTransactions={filteredTransactions}
+				weekday={weekday}
+			/>
 		</div>
 	);
 };
 
-export default TransactionList;
+export default TransactionFilter;

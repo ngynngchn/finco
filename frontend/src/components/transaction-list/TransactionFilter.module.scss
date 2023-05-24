@@ -1,0 +1,8 @@
+.TransactionFilter {
+	display: grid;
+	grid-template-rows: min-content min-content auto;
+	overflow-y: scroll;
+	gap: 1.5vh;
+	position: relative;
+	width: 100%;
+}

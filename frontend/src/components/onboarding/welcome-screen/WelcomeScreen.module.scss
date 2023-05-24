@@ -55,7 +55,7 @@
 
 //* ====== KEY FRAMES FOR ANIMATION ========
 
-//*  Image hovering effect
+//* image hovering effect
 @keyframes hover {
 	0% {
 		transform: translateY(0px);
@@ -67,7 +67,7 @@
 		transform: translateY(0px);
 	}
 }
-//* Image Shadow getting smaller and bigger
+//* image shadow getting smaller and bigger
 @keyframes scale {
 	0% {
 		transform: scale(0.8);
@@ -80,8 +80,7 @@
 	}
 }
 
-//* Sliding out
-
+//* sliding out animation
 @keyframes move-out {
 	0% {
 		transform: translateX(0%);

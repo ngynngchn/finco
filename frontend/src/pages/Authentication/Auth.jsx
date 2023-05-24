@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { userStore } from "../../utils/userStore.js";
-
+// component import
 import Navigation from "../../components/navigation/Navigation.jsx";
 import SplashScreen from "../../components/onboarding/SplashScreen/SplashScreen.jsx";
+import { navigateWithDelay } from "../../utils/helper.js";
 
 const Auth = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -11,10 +12,9 @@ const Auth = () => {
 
 	const url = import.meta.env.VITE_BACKEND_URL;
 	const setUser = (value) => userStore.getState().setUserID(value);
-	const clearStorage = () => {
+
+	const clearStorage = () =>
 		userStore.setState({ userID: null, username: null, userPic: null });
-		console.log("Cleared Storage");
-	};
 
 	useEffect(() => {
 		(async () => {
@@ -23,7 +23,7 @@ const Auth = () => {
 				setIsLoading(false);
 				const user = await response.json();
 				setUser(user);
-				// return;
+				return;
 			} else {
 				try {
 					const response = await fetch(url + "logout", {
@@ -32,7 +32,7 @@ const Auth = () => {
 					});
 					if (response.ok) {
 						clearStorage();
-						navigate("/");
+						navigateWithDelay(navigate, "/", 1500);
 					} else {
 						throw new Error("Logout failed");
 					}
@@ -41,7 +41,7 @@ const Auth = () => {
 				}
 
 				clearStorage();
-				navigate("/onboarding");
+				navigateWithDelay(navigate, "/onboarding", 1500);
 			}
 		})();
 	}, []);

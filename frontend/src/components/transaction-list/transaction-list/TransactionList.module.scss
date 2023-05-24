@@ -1,5 +1,6 @@
-.FilteredList {
+.TransactionList {
 	overflow-y: scroll;
+	scroll-snap-type: y mandatory;
 	height: 100%;
 	p,
 	h3 {
@@ -8,5 +9,8 @@
 	h3 {
 		font-variation-settings: "wght" 700;
 		font-size: 1.1rem;
+	}
+	.TransactionContainer {
+		scroll-snap-align: start;
 	}
 }

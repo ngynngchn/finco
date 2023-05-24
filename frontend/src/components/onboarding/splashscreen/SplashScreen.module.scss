@@ -18,7 +18,7 @@
 
 //* ====== KEY FRAMES FOR ANIMATION ========
 
-//* Image vanishing
+//* image vanishing
 @keyframes vanish {
 	0% {
 		// display: grid;
@@ -29,7 +29,7 @@
 		// display: none;
 	}
 }
-//* Bouncing effect
+//* bouncing effect
 @keyframes bounce {
 	0%,
 	20%,
@@ -46,7 +46,7 @@
 	}
 }
 
-//* Image moving out
+//* image moving out
 @keyframes jumpOut {
 	0% {
 		transform: translateY(0);

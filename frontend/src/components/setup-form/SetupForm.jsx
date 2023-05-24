@@ -1,14 +1,19 @@
-import { useEffect, useRef, useState } from "react";
-import { userStore } from "../../utils/userStore.js";
-import { useNavigate } from "react-router-dom";
-import camera from "../../assets/img/camera.svg";
-import toast, { Toaster } from "react-hot-toast";
 import {
 	formatToDollar,
 	navigateWithDelay,
 	formatCreditCardNumber,
 	failed,
 } from "../../utils/helper.js";
+import { useRef, useState } from "react";
+import { userStore } from "../../utils/userStore.js";
+import { useNavigate } from "react-router-dom";
+
+// style import
+import styles from "./SetupForm.module.scss";
+
+// img import
+import camera from "../../assets/img/camera.svg";
+import toast, { Toaster } from "react-hot-toast";
 
 const SetupForm = () => {
 	const userPic = userStore.getState().userPic;
@@ -117,7 +122,11 @@ const SetupForm = () => {
 	return (
 		<>
 			<Toaster />
-			<form onSubmit={handleSubmit} encType="multipart/form-data">
+			<form
+				className={styles.SetupForm}
+				onSubmit={handleSubmit}
+				encType="multipart/form-data">
+				{/* (1) Image field */}
 				<p>Profile Picture</p>
 				<div>
 					{imageURL && <img src={imageURL} alt="image" />}
@@ -133,6 +142,7 @@ const SetupForm = () => {
 					</label>
 				</div>
 
+				{/* (2) CreditCard field */}
 				<label htmlFor="cardNumber" hidden>
 					Card Number
 				</label>
@@ -146,6 +156,8 @@ const SetupForm = () => {
 					placeholder="Card number"
 					onChange={handleCreditCard}
 				/>
+
+				{/* (3) Expiration date field */}
 				<label htmlFor="expDate">Expiration Date</label>
 				<input
 					type="text"
@@ -161,6 +173,7 @@ const SetupForm = () => {
 					}}
 					onChange={handleDateChange}
 				/>
+				{/* (4) Budget field */}
 				<label htmlFor="budget">Budget</label>
 				<input
 					type="number"

@@ -10,17 +10,18 @@ import BalanceCard from "../../components/transaction-stats/balance-card/Balance
 
 // style import
 import styles from "./Home.module.scss";
+
 // image import
 import alert from "../../assets/img/alert.svg";
 
 const Home = () => {
 	const [totalExpenses, setTotalExpenses] = useState(0);
 	const [totalIncome, setTotalIncome] = useState(0);
-	const URL = import.meta.env.VITE_BACKEND_URL;
+	const url = import.meta.env.VITE_BACKEND_URL;
 
 	const getStats = async () => {
 		try {
-			const response = await fetch(URL + "getTotalTransactionsByMonth", {
+			const response = await fetch(url + "getTotalTransactionsByMonth", {
 				credentials: "include",
 			});
 			if (response.ok) {

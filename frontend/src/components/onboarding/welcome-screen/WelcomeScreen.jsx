@@ -1,6 +1,9 @@
-import { Link } from "react-router-dom";
-import styles from "./WelcomeScreen.module.scss";
 import { userStore } from "../../../utils/userStore.js";
+import { Link } from "react-router-dom";
+
+// style import
+import styles from "./WelcomeScreen.module.scss";
+
 // img import
 import arrow from "../../../assets/img/arrow-right.svg";
 import shadow from "../../../assets/img/shadow.svg";

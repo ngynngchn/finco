@@ -1,9 +1,10 @@
-import styles from "./TransactionsStats.module.scss";
+import styles from "./TransactionCard.module.scss";
 
 function TransactionCard({ amount, img, style, content, mini }) {
 	return (
 		<article
-			className={!mini ? `${styles.TransactionCard}` : ` ${styles.MiniCard}`}>
+			/* select style depending on "mini" */
+			className={mini ? ` ${styles.MiniCard}` : `${styles.TransactionCard}`}>
 			<img src={img} alt="icon" style={style} />
 			<p>{content}</p>
 			<h4>

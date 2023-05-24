@@ -1,5 +1,6 @@
+// style import
 import styles from "./SplashScreen.module.scss";
-
+// img import
 import logo from "../../../assets/img/logo.svg";
 
 function SplashScreen() {
