@@ -4,7 +4,7 @@ export const formatToDollar = (value) => {
 		style: "currency",
 		currency: "USD",
 		maximumFractionDigits: 2,
-		minimumFractionDigits: 2,
+		minimumFractionDigits: 0,
 	}).format(value);
 };
 

@@ -23,14 +23,15 @@ const LogoutButton = () => {
 				credentials: "include",
 			});
 			if (response.ok) {
+				navigate("/onboarding");
 				clearStorage();
-				navigate("/");
 			} else {
 				throw new Error("Logout failed");
 			}
 		} catch (error) {
 			console.log(error);
 		}
+		navigate("/onboarding");
 	};
 
 	return (

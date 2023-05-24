@@ -23,7 +23,7 @@ const Auth = () => {
 				setIsLoading(false);
 				const user = await response.json();
 				setUser(user);
-				return;
+				// return;
 			} else {
 				try {
 					const response = await fetch(url + "logout", {
@@ -32,7 +32,7 @@ const Auth = () => {
 					});
 					if (response.ok) {
 						clearStorage();
-						navigateWithDelay(navigate, "/", 1500);
+						navigateWithDelay(navigate, "/onboarding", 1500);
 					} else {
 						throw new Error("Logout failed");
 					}
