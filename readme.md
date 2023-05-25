@@ -4,8 +4,7 @@
 
 The original repository can be found [here](https://github.com/allbutgold/finco).
 
-As the original project was collaboratively developed, there was a lot of repetitive code.
-After reviewing the original project I restructured the directories and altered some components and pages for better readablity and DRY code.
+Since the original project was developed collaboratively, there was some repetitive code. After reviewing the project, I made improvements by restructuring directories and optimizing components and pages. These changes were made to enhance code readability and promote the DRY (Don't Repeat Yourself) principle.
 
 ## Description
 
@@ -35,10 +34,16 @@ The design was provided by our bootcamp via a Figma file.
 
 Here are some screenshots of our application:
 
-<img src="https://github.com/ngynngchn/finco/assets/107808109/744286a4-9f69-4f28-b0e9-7a8aead4d37d" width=50% height=50%>
-<img src="https://github.com/ngynngchn/finco/assets/107808109/66be818d-6e49-4e4f-9df2-e41c82a151ce" width=50% height=50%>
-<img src="https://github.com/ngynngchn/finco/assets/107808109/3367d6bb-7380-4414-b560-6ef3b687c2ae" width=50% height=50%>
-<img src="https://github.com/ngynngchn/finco/assets/107808109/50fb519b-d219-4fba-a5ba-11ea599d06fa" width=50% height=50%>
+<p align="center">
+<img src="https://github.com/ngynngchn/finco/assets/107808109/e8b6af0d-70d5-4dbf-8ce9-2abc567ed76d" width=45% height=50%>
+</p>
+
+<p>
+    <img align="left" src="https://github.com/ngynngchn/finco/assets/107808109/744286a4-9f69-4f28-b0e9-7a8aead4d37d" width=25% height=30% >
+    <img align="left" src="https://github.com/ngynngchn/finco/assets/107808109/66be818d-6e49-4e4f-9df2-e41c82a151ce" width=25% height=30%  >
+    <img align="left" src="https://github.com/ngynngchn/finco/assets/107808109/50fb519b-d219-4fba-a5ba-11ea599d06fa" width=25% height=30%   >
+    <img align="left" src="https://github.com/ngynngchn/finco/assets/107808109/3367d6bb-7380-4414-b560-6ef3b687c2ae" width=25% height=30% >
+</p>
 
 ## Future Features
 
