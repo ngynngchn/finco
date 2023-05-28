@@ -39,10 +39,10 @@ Here are some screenshots of our application:
 </p>
 
 <p>
-    <img align="left" src="https://github.com/ngynngchn/finco/assets/107808109/744286a4-9f69-4f28-b0e9-7a8aead4d37d" width=22% height=30% >
-    <img align="left" src="https://github.com/ngynngchn/finco/assets/107808109/66be818d-6e49-4e4f-9df2-e41c82a151ce" width=22% height=30%  >
-    <img align="left" src="https://github.com/ngynngchn/finco/assets/107808109/50fb519b-d219-4fba-a5ba-11ea599d06fa" width=22% height=30%   >
-    <img align="left" src="https://github.com/ngynngchn/finco/assets/107808109/3367d6bb-7380-4414-b560-6ef3b687c2ae" width=22% height=30% >
+    <img align="left" src="https://github.com/ngynngchn/finco/assets/107808109/744286a4-9f69-4f28-b0e9-7a8aead4d37d" width=22.5% height=30% >
+    <img align="left" src="https://github.com/ngynngchn/finco/assets/107808109/66be818d-6e49-4e4f-9df2-e41c82a151ce" width=22.5% height=30%  >
+    <img align="left" src="https://github.com/ngynngchn/finco/assets/107808109/50fb519b-d219-4fba-a5ba-11ea599d06fa" width=22.5% height=30%   >
+    <img align="left" src="https://github.com/ngynngchn/finco/assets/107808109/3367d6bb-7380-4414-b560-6ef3b687c2ae" width=22.5% height=30% >
 </p>
 
 <br>
