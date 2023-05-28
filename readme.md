@@ -49,6 +49,8 @@ Here are some screenshots of our application:
 
 ---
 
+---
+
 ## Future Features
 
 - **Forget Passoword**: Be able to reset your password.
