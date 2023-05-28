@@ -5,14 +5,16 @@ import { ObjectId } from "mongodb";
 const COL = "user";
 
 const register = async (req, res) => {
-	console.log(req);
+	const email = req.body.account.email;
+	console.log(email);
 	try {
 		const db = await getDb();
-		const { email, password } = req.body;
-		console.log(req.body);
 
 		// check if user already exists
-		const user = await db.collection(COL).findOne({ email });
+		const user = await db
+			.collection(COL)
+			.findOne({ account: { email: email } });
+		console.log(user);
 		if (user == null) {
 			await db.collection(COL).insertOne(req.body);
 			res.status(200).send("Successfully registered");
