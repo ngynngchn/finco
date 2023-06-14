@@ -6,7 +6,6 @@ const COL = "user";
 
 const register = async (req, res) => {
 	const email = req.body.account.email;
-	console.log(email);
 	try {
 		const db = await getDb();
 
@@ -14,7 +13,6 @@ const register = async (req, res) => {
 		const user = await db
 			.collection(COL)
 			.findOne({ account: { email: email } });
-		console.log(user);
 		if (user == null) {
 			await db.collection(COL).insertOne(req.body);
 			res.status(200).send("Successfully registered");
