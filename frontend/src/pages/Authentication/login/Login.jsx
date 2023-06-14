@@ -32,6 +32,7 @@ const Login = () => {
 			headers: {
 				"Content-Type": "application/json",
 			},
+
 			body: JSON.stringify({
 				account: {
 					email: email,
@@ -80,25 +81,24 @@ const Login = () => {
 			<h1>Welcome back</h1>
 			<p>Never miss a payment again with our finance tracking app.</p>
 			<form onSubmit={login}>
-				<label htmlFor="email" hidden>
-					Email
+				<label>
+					<input
+						type="email"
+						name="email"
+						value={email}
+						onChange={(event) => setEmail(event.target.value)}
+						placeholder="Email"
+						required
+					/>
+					<span hidden>Email</span>
 				</label>
-				<input
-					type="email"
-					id="email"
-					name="email"
-					value={email}
-					onChange={(event) => setEmail(event.target.value)}
-					placeholder="Email"
-					required
-				/>
-				<label htmlFor="password" hidden>
-					Password
+				<label>
+					<Password
+						value={password}
+						onChange={(event) => setPassword(event.target.value)}
+					/>
+					<span hidden>Password</span>
 				</label>
-				<Password
-					value={password}
-					onChange={(event) => setPassword(event.target.value)}
-				/>
 				{/* <Link>Forgot password?</Link> */}
 				<button type="submit">Login</button>
 			</form>
